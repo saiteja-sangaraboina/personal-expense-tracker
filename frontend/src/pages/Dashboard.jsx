@@ -6,6 +6,7 @@ import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
 import CurrencyConverterWidget from '../components/CurrencyConverterWidget';
 import FinancialHealthScoreCard from '../components/FinancialHealthScoreCard';
+import SpendingInsightsCard from '../components/SpendingInsightsCard';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -123,6 +124,11 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+
+      <SpendingInsightsCard
+        currentTransactions={summary?.recentTransactions || []}
+        previousTransactions={[]}
+      />
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <FinancialHealthScoreCard summary={summary} />
