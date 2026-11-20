@@ -73,6 +73,7 @@ app.use('/api/cashflow', require('./routes/cashflow'));
 app.use('/api/accounts', require('./routes/accounts'));
 app.use('/api/tags', require('./routes/tags'));
 app.use('/api/telemetry', require('./routes/telemetry'));
+app.use('/api/webhooks', require('./routes/webhooks'));
 
 // 404 handler
 app.use(notFound);
