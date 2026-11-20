@@ -6,8 +6,9 @@ import SpendingForecastCard from '../components/SpendingForecastCard';
 import NetWorthCard from '../components/NetWorthCard';
 import DebtPayoffSimulator from '../components/DebtPayoffSimulator';
 import TaxEstimatorCard from '../components/TaxEstimatorCard';
+import YearInReviewModal from '../components/YearInReviewModal';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
-import { Download, FileText } from 'lucide-react';
+import { Download, FileText, Sparkles } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend, LineChart, Line,
@@ -22,6 +23,7 @@ const Reports = () => {
   const [summary, setSummary] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [reviewOpen, setReviewOpen] = useState(false);
   const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
@@ -60,6 +62,12 @@ const Reports = () => {
           className="btn-secondary text-sm flex items-center gap-2 py-2"
         >
           <FileText size={16} /> Export PDF Statement
+        </button>
+        <button
+          onClick={() => setReviewOpen(true)}
+          className="btn-primary text-sm flex items-center gap-2 py-2"
+        >
+          <Sparkles size={16} /> Year in Review
         </button>
       </div>
 
@@ -132,6 +140,13 @@ const Reports = () => {
 
       {/* Debt Payoff Accelerator */}
       <DebtPayoffSimulator />
+
+      <YearInReviewModal
+        isOpen={reviewOpen}
+        onClose={() => setReviewOpen(false)}
+        transactions={transactions}
+        year={year}
+      />
     </div>
   );
 };
