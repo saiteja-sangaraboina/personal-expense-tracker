@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Plus, AlertTriangle, CheckCircle, X } from 'lucide-react';
 import { budgetService } from '../services/services';
 import BudgetSuggestionCard from '../components/BudgetSuggestionCard';
+import BudgetUtilizationCard from '../components/BudgetUtilizationCard';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = ['Food','Shopping','Transportation','Education','Entertainment','Healthcare','Bills','Travel','Other'];
@@ -71,6 +72,8 @@ const Budgets = () => {
           <Plus size={15} /> Set Budget
         </button>
       </div>
+
+      <BudgetUtilizationCard budgets={budgets} />
 
       {/* Form */}
       {showForm && (
