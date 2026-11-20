@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { dashboardService, transactionService } from '../services/services';
 import { useAuth } from '../context/AuthContext';
 import ExpenseHeatmap from '../components/ExpenseHeatmap';
+import SpendingForecastCard from '../components/SpendingForecastCard';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
 import { Download, FileText } from 'lucide-react';
 import {
@@ -59,8 +60,15 @@ const Reports = () => {
         </button>
       </div>
 
-      {/* Heatmap */}
-      <ExpenseHeatmap transactions={transactions} />
+      {/* Heatmap & Forecast */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <ExpenseHeatmap transactions={transactions} />
+        </div>
+        <div>
+          <SpendingForecastCard monthlyData={analytics?.monthlyChart} />
+        </div>
+      </div>
 
       {/* Bar Chart */}
       <div className="card">
