@@ -12,6 +12,14 @@ describe('Data Portability & Archive Formatting', () => {
       { type: 'expense', amount: 80, category: 'Food' },
     ];
 
+    const mockAccounts = [
+      { name: 'Checking Account', type: 'checking', balance: 5000 },
+    ];
+
+    const mockTags = [
+      { name: 'tax-deductible', color: '#10b981' },
+    ];
+
     const archive = {
       exportedAt: new Date().toISOString(),
       account: mockUser,
@@ -19,15 +27,22 @@ describe('Data Portability & Archive Formatting', () => {
         transactions: mockTransactions.length,
         budgets: 0,
         goals: 0,
+        accounts: mockAccounts.length,
+        tags: mockTags.length,
       },
       data: {
         transactions: mockTransactions,
+        accounts: mockAccounts,
+        tags: mockTags,
       },
     };
 
     expect(archive.exportedAt).toBeTruthy();
     expect(archive.account.email).toBe('test@example.com');
     expect(archive.counts.transactions).toBe(2);
+    expect(archive.counts.accounts).toBe(1);
+    expect(archive.counts.tags).toBe(1);
     expect(archive.data.transactions).toHaveLength(2);
+    expect(archive.data.accounts).toHaveLength(1);
   });
 });
