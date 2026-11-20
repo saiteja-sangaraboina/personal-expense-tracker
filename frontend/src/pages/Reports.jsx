@@ -7,6 +7,7 @@ import NetWorthCard from '../components/NetWorthCard';
 import DebtPayoffSimulator from '../components/DebtPayoffSimulator';
 import TaxEstimatorCard from '../components/TaxEstimatorCard';
 import YearInReviewModal from '../components/YearInReviewModal';
+import IncomeBreakdownCard from '../components/IncomeBreakdownCard';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
 import { Download, FileText, Sparkles } from 'lucide-react';
 import {
@@ -100,6 +101,7 @@ const Reports = () => {
         </ResponsiveContainer>
       </div>
 
+      {/* Category Breakdown & Trend */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Line Chart */}
         <div className="card">
@@ -134,6 +136,9 @@ const Reports = () => {
           )}
         </div>
       </div>
+
+      {/* Income Stream Diversification Analysis */}
+      <IncomeBreakdownCard transactions={transactions} />
 
       {/* Annual Tax Projection */}
       <TaxEstimatorCard />
