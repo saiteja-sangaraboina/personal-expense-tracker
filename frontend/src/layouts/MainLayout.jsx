@@ -12,6 +12,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 const pageTitles = {
   '/dashboard': 'Dashboard',
   '/transactions': 'Transactions',
+  '/accounts': 'Accounts & Wallets',
   '/budgets': 'Budget Manager',
   '/goals': 'Savings Goals',
   '/recurring': 'Subscriptions & Recurring',
