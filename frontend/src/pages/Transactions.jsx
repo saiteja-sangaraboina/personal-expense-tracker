@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Plus, Search, Filter, Download, Upload, Camera } from 'lucide-react';
+import { Plus, Search, Filter, Download, Upload, Camera, Users } from 'lucide-react';
 import { transactionService } from '../services/services';
 import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
 import CsvImportModal from '../components/CsvImportModal';
 import ReceiptScannerModal from '../components/ReceiptScannerModal';
+import BillSplitterModal from '../components/BillSplitterModal';
 import ExcelExportButton from '../components/ExcelExportButton';
 import toast from 'react-hot-toast';
 
@@ -16,6 +17,7 @@ const Transactions = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
   const [scannerOpen, setScannerOpen] = useState(false);
+  const [splitterOpen, setSplitterOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [total, setTotal] = useState(0);
   const [filters, setFilters] = useState({ type: '', category: '', search: '', sortBy: 'date', order: 'desc', page: 1 });
@@ -71,6 +73,9 @@ const Transactions = () => {
             <Download size={15} /> Export CSV
           </button>
           <ExcelExportButton transactions={transactions} />
+          <button onClick={() => setSplitterOpen(true)} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
+            <Users size={15} /> Split Bill
+          </button>
           <button onClick={() => setScannerOpen(true)} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
             <Camera size={15} /> Scan Receipt
           </button>
@@ -129,6 +134,7 @@ const Transactions = () => {
       <TransactionModal isOpen={modalOpen} onClose={handleClose} transaction={editing} onSuccess={() => { fetchTransactions(); handleClose(); }} />
       <CsvImportModal isOpen={importOpen} onClose={() => setImportOpen(false)} onSuccess={fetchTransactions} />
       <ReceiptScannerModal isOpen={scannerOpen} onClose={() => setScannerOpen(false)} onSuccess={fetchTransactions} />
+      <BillSplitterModal isOpen={splitterOpen} onClose={() => setSplitterOpen(false)} />
     </div>
   );
 };
