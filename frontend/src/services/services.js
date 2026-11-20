@@ -38,6 +38,13 @@ export const recurringService = {
   remove: (id) => API.delete(`/recurring/${id}`),
 };
 
+export const categoryService = {
+  getAll: (params) => API.get('/categories', { params }),
+  create: (data) => API.post('/categories', data),
+  update: (id, data) => API.put(`/categories/${id}`, data),
+  remove: (id) => API.delete(`/categories/${id}`),
+};
+
 export const dashboardService = {
   getSummary: () => API.get('/dashboard/summary'),
   getAnalytics: (params) => API.get('/dashboard/analytics', { params }),
