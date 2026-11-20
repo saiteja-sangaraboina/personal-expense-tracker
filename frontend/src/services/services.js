@@ -6,6 +6,8 @@ export const authService = {
   getMe: () => API.get('/auth/me'),
   updateProfile: (data) => API.put('/auth/profile', data),
   updatePassword: (data) => API.put('/auth/password', data),
+  exportData: () => API.get('/auth/export-data'),
+  deleteAccount: () => API.delete('/auth/delete-account'),
 };
 
 export const transactionService = {
