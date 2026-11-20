@@ -6,6 +6,8 @@ const pageTitles = {
   '/dashboard': 'Dashboard',
   '/transactions': 'Transactions',
   '/budgets': 'Budget Manager',
+  '/goals': 'Savings Goals',
+  '/recurring': 'Subscriptions & Recurring',
   '/reports': 'Reports & Analytics',
   '/profile': 'My Profile',
   '/settings': 'Settings',
