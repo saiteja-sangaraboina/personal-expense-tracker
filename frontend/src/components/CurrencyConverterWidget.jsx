@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { ArrowRightLeft } from 'lucide-react';
+import { ArrowRightLeft, TrendingUp } from 'lucide-react';
 import { convertCurrency, getExchangeRateText } from '../utils/currencyRates';
 import { SUPPORTED_CURRENCIES } from '../utils/constants';
+import CurrencyTrendsModal from './CurrencyTrendsModal';
 
 const CurrencyConverterWidget = () => {
   const [amount, setAmount] = useState('100');
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('EUR');
+  const [trendsOpen, setTrendsOpen] = useState(false);
 
   const convertedResult = convertCurrency(Number(amount) || 0, from, to);
 
@@ -23,9 +25,18 @@ const CurrencyConverterWidget = () => {
           <ArrowRightLeft size={16} className="text-indigo-600 dark:text-indigo-400" />
           Quick Currency Converter
         </h3>
-        <span className="text-[11px] text-gray-400">
-          {getExchangeRateText(from, to)}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-gray-400">
+            {getExchangeRateText(from, to)}
+          </span>
+          <button
+            type="button"
+            onClick={() => setTrendsOpen(true)}
+            className="text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
+          >
+            <TrendingUp size={12} /> Trend
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-center">
@@ -80,6 +91,13 @@ const CurrencyConverterWidget = () => {
           </div>
         </div>
       </div>
+
+      <CurrencyTrendsModal
+        isOpen={trendsOpen}
+        onClose={() => setTrendsOpen(false)}
+        from={from}
+        to={to}
+      />
     </div>
   );
 };
