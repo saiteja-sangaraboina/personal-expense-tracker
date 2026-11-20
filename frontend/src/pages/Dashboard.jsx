@@ -4,6 +4,7 @@ import { dashboardService } from '../services/services';
 import StatCard from '../components/StatCard';
 import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
+import CurrencyConverterWidget from '../components/CurrencyConverterWidget';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -121,6 +122,8 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+
+      <CurrencyConverterWidget />
 
       <TransactionModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onSuccess={fetchData} />
     </div>
