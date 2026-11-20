@@ -1,9 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Plus, Search, Filter, Download, Upload } from 'lucide-react';
+import { Plus, Search, Filter, Download, Upload, Camera } from 'lucide-react';
 import { transactionService } from '../services/services';
 import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
 import CsvImportModal from '../components/CsvImportModal';
+import ReceiptScannerModal from '../components/ReceiptScannerModal';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = ['All','Food','Shopping','Transportation','Education','Entertainment','Healthcare','Bills','Travel','Salary','Freelance','Other'];
@@ -13,6 +14,7 @@ const Transactions = () => {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
+  const [scannerOpen, setScannerOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [total, setTotal] = useState(0);
   const [filters, setFilters] = useState({ type: '', category: '', search: '', sortBy: 'date', order: 'desc', page: 1 });
@@ -66,6 +68,9 @@ const Transactions = () => {
           </button>
           <button onClick={handleExport} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
             <Download size={15} /> Export CSV
+          </button>
+          <button onClick={() => setScannerOpen(true)} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
+            <Camera size={15} /> Scan Receipt
           </button>
           <button onClick={() => setModalOpen(true)} className="btn-primary text-sm flex items-center gap-1.5 py-2">
             <Plus size={15} /> Add Transaction
@@ -121,6 +126,7 @@ const Transactions = () => {
 
       <TransactionModal isOpen={modalOpen} onClose={handleClose} transaction={editing} onSuccess={() => { fetchTransactions(); handleClose(); }} />
       <CsvImportModal isOpen={importOpen} onClose={() => setImportOpen(false)} onSuccess={fetchTransactions} />
+      <ReceiptScannerModal isOpen={scannerOpen} onClose={() => setScannerOpen(false)} onSuccess={fetchTransactions} />
     </div>
   );
 };
