@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Tag, Plus, Pencil, Trash2 } from 'lucide-react';
 import { categoryService } from '../services/services';
 import CategoryModal from '../components/CategoryModal';
+import CategoryDriftCard from '../components/CategoryDriftCard';
 import EmptyState from '../components/EmptyState';
 import toast from 'react-hot-toast';
 
@@ -57,6 +58,11 @@ const Categories = () => {
           <Plus size={16} /> Add Category
         </button>
       </div>
+
+      <CategoryDriftCard
+        currentSpend={{ Food: 540, Shopping: 280, Transportation: 160, Entertainment: 120 }}
+        previousSpend={{ Food: 420, Shopping: 350, Transportation: 155, Entertainment: 80 }}
+      />
 
       {categories.length === 0 && !loading ? (
         <EmptyState
