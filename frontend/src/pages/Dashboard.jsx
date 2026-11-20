@@ -8,6 +8,7 @@ import CurrencyConverterWidget from '../components/CurrencyConverterWidget';
 import FinancialHealthScoreCard from '../components/FinancialHealthScoreCard';
 import SpendingInsightsCard from '../components/SpendingInsightsCard';
 import WelcomeBanner from '../components/WelcomeBanner';
+import EmergencyFundCard from '../components/EmergencyFundCard';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -138,7 +139,10 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <FinancialHealthScoreCard summary={summary} />
-        <CurrencyConverterWidget />
+        <EmergencyFundCard
+          monthlyEssential={Math.round((summary?.totalExpenses || 2500) * 0.7)}
+          currentSavings={summary?.monthlySavings || 5000}
+        />
       </div>
 
       <TransactionModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onSuccess={fetchData} />
