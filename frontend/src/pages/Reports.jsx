@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { dashboardService } from '../services/services';
+import { dashboardService, transactionService } from '../services/services';
+import { useAuth } from '../context/AuthContext';
+import ExpenseHeatmap from '../components/ExpenseHeatmap';
+import { exportFinancialReportPdf } from '../utils/pdfExport';
+import { Download, FileText } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend, LineChart, Line,
@@ -9,28 +13,54 @@ import toast from 'react-hot-toast';
 const COLORS = ['#6366f1','#f59e0b','#10b981','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899'];
 
 const Reports = () => {
+  const { user } = useAuth();
   const [analytics, setAnalytics] = useState(null);
+  const [summary, setSummary] = useState(null);
+  const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     setLoading(true);
-    dashboardService.getAnalytics({ year })
-      .then(({ data }) => setAnalytics(data.data))
+    Promise.all([
+      dashboardService.getAnalytics({ year }),
+      dashboardService.getSummary(),
+      transactionService.getAll({ limit: 100 }),
+    ])
+      .then(([aRes, sRes, tRes]) => {
+        setAnalytics(aRes.data.data);
+        setSummary(sRes.data.data);
+        setTransactions(tRes.data.data || []);
+      })
       .catch(() => toast.error('Failed to load analytics'))
       .finally(() => setLoading(false));
   }, [year]);
+
+  const handleExportPdf = () => {
+    exportFinancialReportPdf({ summary, analytics, user, year });
+  };
 
   if (loading) return <div className="flex justify-center py-20"><div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" /></div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-4">
-        <label className="label mb-0">Year:</label>
-        <select className="input-field w-32" value={year} onChange={(e) => setYear(Number(e.target.value))}>
-          {[2023, 2024, 2025, 2026].map((y) => <option key={y}>{y}</option>)}
-        </select>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <label className="label mb-0">Year:</label>
+          <select className="input-field w-32" value={year} onChange={(e) => setYear(Number(e.target.value))}>
+            {[2023, 2024, 2025, 2026, 2027].map((y) => <option key={y} value={y}>{y}</option>)}
+          </select>
+        </div>
+        <button
+          onClick={handleExportPdf}
+          className="btn-secondary text-sm flex items-center gap-2 py-2"
+        >
+          <FileText size={16} /> Export PDF Statement
+        </button>
       </div>
+
+      {/* Heatmap */}
+      <ExpenseHeatmap transactions={transactions} />
 
       {/* Bar Chart */}
       <div className="card">
