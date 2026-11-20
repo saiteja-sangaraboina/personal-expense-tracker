@@ -3,6 +3,8 @@ import { dashboardService, transactionService } from '../services/services';
 import { useAuth } from '../context/AuthContext';
 import ExpenseHeatmap from '../components/ExpenseHeatmap';
 import SpendingForecastCard from '../components/SpendingForecastCard';
+import NetWorthCard from '../components/NetWorthCard';
+import DebtPayoffSimulator from '../components/DebtPayoffSimulator';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
 import { Download, FileText } from 'lucide-react';
 import {
@@ -59,6 +61,9 @@ const Reports = () => {
           <FileText size={16} /> Export PDF Statement
         </button>
       </div>
+
+      {/* Net Worth & Solvency Overview */}
+      <NetWorthCard />
 
       {/* Heatmap & Forecast */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -120,6 +125,9 @@ const Reports = () => {
           )}
         </div>
       </div>
+
+      {/* Debt Payoff Accelerator */}
+      <DebtPayoffSimulator />
     </div>
   );
 };
