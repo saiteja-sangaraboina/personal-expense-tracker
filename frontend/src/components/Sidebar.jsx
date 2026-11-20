@@ -10,6 +10,7 @@ import { useState } from 'react';
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/transactions', icon: ArrowUpDown, label: 'Transactions' },
+  { to: '/accounts', icon: Wallet, label: 'Accounts & Wallets' },
   { to: '/budgets', icon: PiggyBank, label: 'Budgets' },
   { to: '/goals', icon: Target, label: 'Savings Goals' },
   { to: '/recurring', icon: CalendarClock, label: 'Subscriptions' },
