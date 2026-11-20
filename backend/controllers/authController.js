@@ -1,4 +1,9 @@
 const User = require('../models/User');
+const Transaction = require('../models/Transaction');
+const Budget = require('../models/Budget');
+const Goal = require('../models/Goal');
+const Recurring = require('../models/RecurringTransaction');
+const Category = require('../models/Category');
 const { sendTokenResponse } = require('../utils/tokenUtils');
 
 // @desc    Register user
@@ -129,4 +134,76 @@ const updatePassword = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getMe, updateProfile, updatePassword };
+// @desc    Export all user financial records (Data Portability)
+// @route   GET /api/auth/export-data
+// @access  Private
+const exportUserData = async (req, res, next) => {
+  try {
+    const userId = req.user._id;
+
+    const [user, transactions, budgets, goals, recurring, categories] = await Promise.all([
+      User.findById(userId),
+      Transaction.find({ userId }),
+      Budget.find({ userId }),
+      Goal.find({ userId }),
+      Recurring.find({ userId }),
+      Category.find({ userId }),
+    ]);
+
+    const archive = {
+      exportedAt: new Date().toISOString(),
+      account: {
+        name: user.name,
+        email: user.email,
+        currency: user.currency,
+        theme: user.theme,
+        createdAt: user.createdAt,
+      },
+      counts: {
+        transactions: transactions.length,
+        budgets: budgets.length,
+        goals: goals.length,
+        recurring: recurring.length,
+        categories: categories.length,
+      },
+      data: {
+        transactions,
+        budgets,
+        goals,
+        recurring,
+        categories,
+      },
+    };
+
+    res.status(200).json({ success: true, archive });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Delete user account and cascade delete all personal records
+// @route   DELETE /api/auth/delete-account
+// @access  Private
+const deleteAccount = async (req, res, next) => {
+  try {
+    const userId = req.user._id;
+
+    await Promise.all([
+      Transaction.deleteMany({ userId }),
+      Budget.deleteMany({ userId }),
+      Goal.deleteMany({ userId }),
+      Recurring.deleteMany({ userId }),
+      Category.deleteMany({ userId }),
+      User.findByIdAndDelete(userId),
+    ]);
+
+    res.status(200).json({
+      success: true,
+      message: 'Your account and all associated financial records have been permanently removed.',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getMe, updateProfile, updatePassword, exportUserData, deleteAccount };
