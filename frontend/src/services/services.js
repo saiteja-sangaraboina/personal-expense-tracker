@@ -51,3 +51,10 @@ export const dashboardService = {
   getSummary: () => API.get('/dashboard/summary'),
   getAnalytics: (params) => API.get('/dashboard/analytics', { params }),
 };
+
+export const accountService = {
+  getAll: () => API.get('/accounts'),
+  create: (data) => API.post('/accounts', data),
+  transfer: (data) => API.post('/accounts/transfer', data),
+  remove: (id) => API.delete(`/accounts/${id}`),
+};
