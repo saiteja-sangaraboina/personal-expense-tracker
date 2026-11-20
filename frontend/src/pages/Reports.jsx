@@ -9,6 +9,8 @@ import TaxEstimatorCard from '../components/TaxEstimatorCard';
 import YearInReviewModal from '../components/YearInReviewModal';
 import IncomeBreakdownCard from '../components/IncomeBreakdownCard';
 import AnomalyAlertCard from '../components/AnomalyAlertCard';
+import FinancialRatiosCard from '../components/FinancialRatiosCard';
+import TaxWithholdingCard from '../components/TaxWithholdingCard';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
 import { Download, FileText, Sparkles } from 'lucide-react';
 import {
@@ -146,6 +148,16 @@ const Reports = () => {
 
       {/* Annual Tax Projection */}
       <TaxEstimatorCard />
+
+      {/* Paycheck Withholding Breakdown */}
+      <TaxWithholdingCard />
+
+      {/* Solvency & Liquidity Ratios */}
+      <FinancialRatiosCard
+        monthlyIncome={summary?.totalIncome || 5000}
+        monthlyExpenses={summary?.totalExpenses || 3200}
+        liquidCash={summary?.balance || 14000}
+      />
 
       {/* Debt Payoff Accelerator */}
       <DebtPayoffSimulator />
