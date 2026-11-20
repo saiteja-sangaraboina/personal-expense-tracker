@@ -66,6 +66,7 @@ app.use('/api/categories', require('./routes/categories'));
 app.use('/api/activity', require('./routes/activity'));
 app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/cashflow', require('./routes/cashflow'));
+app.use('/api/accounts', require('./routes/accounts'));
 
 // 404 handler
 app.use(notFound);
