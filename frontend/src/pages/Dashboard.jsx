@@ -7,6 +7,7 @@ import TransactionModal from '../components/TransactionModal';
 import CurrencyConverterWidget from '../components/CurrencyConverterWidget';
 import FinancialHealthScoreCard from '../components/FinancialHealthScoreCard';
 import SpendingInsightsCard from '../components/SpendingInsightsCard';
+import WelcomeBanner from '../components/WelcomeBanner';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -45,6 +46,11 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6">
+      <WelcomeBanner
+        totalBalance={summary?.balance}
+        monthlySavings={summary?.monthlySavings}
+      />
+
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard title="Total Balance" amount={summary?.balance} icon={Wallet} color="indigo" />
