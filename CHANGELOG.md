@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-11-20
+### Added
+- Smart AI Spending Insights engine with natural language category shift analysis.
+- 50/30/20 rule budgeting calculator and automated buffer limit suggestions.
+- OCR camera receipt scanner modal with automatic vendor detection and itemization.
+- Personalized time-aware WelcomeBanner on Dashboard with financial pulse indicators.
+- QuickActionBar speed-dial and MobileNav bottom navigation bar.
+- Structured request latency telemetry and client audit logging middleware.
+- Expanded Vitest and Jest testing coverage to 19 suites (63 passing tests).
+- Detailed Testing Architecture & Verification Guide (`TESTING_GUIDE.md`).
+
+## [1.3.0] - 2026-11-20
+### Added
+- 100-point Financial Health Score calculator with metric breakdown.
+- Linear regression 30-day spending projection and forecasting engine.
+- Gamified savings milestone badges and achievement unlocks.
+- Global keyboard navigation shortcuts (`N` for new transaction, `T` for theme, `?` for help).
+
 ## [1.2.0] - 2026-11-20
 ### Added
 - Multi-currency exchange rate calculation utility and currency switcher.
