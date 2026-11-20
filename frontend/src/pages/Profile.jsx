@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { authService } from '../services/services';
+import AchievementBadges from '../components/AchievementBadges';
 import { User, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -46,6 +47,9 @@ const Profile = () => {
           <p className="text-xs text-gray-400 mt-1">Member since {new Date(user?.createdAt).toLocaleDateString()}</p>
         </div>
       </div>
+
+      {/* Badges & Milestones */}
+      <AchievementBadges />
 
       {/* Profile Form */}
       <div className="card">
