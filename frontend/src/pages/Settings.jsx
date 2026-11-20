@@ -3,7 +3,8 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { authService } from '../services/services';
 import ConfirmModal from '../components/ConfirmModal';
-import { Sun, Moon, LogOut, Download, AlertTriangle, ShieldCheck } from 'lucide-react';
+import SecurityPinModal from '../components/SecurityPinModal';
+import { Sun, Moon, LogOut, Download, AlertTriangle, ShieldCheck, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -12,6 +13,7 @@ const Settings = () => {
   const { user, logout: authLogout } = useAuth();
   const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const handleLogout = () => {
@@ -91,6 +93,27 @@ const Settings = () => {
       </div>
 
       <div className="card">
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Access Security & PIN</h3>
+        <p className="text-xs text-gray-500 mb-5">
+          Enable a 4-digit security PIN for session locks and transaction approvals.
+        </p>
+        <div className="flex items-center justify-between py-3 border-t border-gray-100 dark:border-gray-700">
+          <div>
+            <p className="text-sm font-medium text-gray-900 dark:text-white flex items-center gap-1.5">
+              <Lock size={16} className="text-indigo-500" /> Security PIN Verification
+            </p>
+            <p className="text-xs text-gray-500">SHA-256 local encrypted PIN</p>
+          </div>
+          <button
+            onClick={() => setIsPinModalOpen(true)}
+            className="btn-secondary text-sm flex items-center gap-2 py-2"
+          >
+            <Lock size={15} /> Verify PIN
+          </button>
+        </div>
+      </div>
+
+      <div className="card">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-5">Account Actions</h3>
         <div className="space-y-4">
           <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
@@ -128,6 +151,11 @@ const Settings = () => {
         message="This will immediately and irreversibly delete your profile, transactions, budgets, goals, and history. Are you absolutely sure?"
         confirmText="Yes, Delete Everything"
         isDestructive={true}
+      />
+
+      <SecurityPinModal
+        isOpen={isPinModalOpen}
+        onClose={() => setIsPinModalOpen(false)}
       />
     </div>
   );
