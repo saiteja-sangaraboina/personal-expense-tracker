@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { CalendarClock, Plus, Pencil, Trash2, CheckCircle2, PauseCircle } from 'lucide-react';
 import { recurringService } from '../services/services';
 import RecurringModal from '../components/RecurringModal';
+import BillReminderCard from '../components/BillReminderCard';
 import EmptyState from '../components/EmptyState';
 import { SkeletonRow } from '../components/LoadingSkeleton';
 import toast from 'react-hot-toast';
@@ -92,6 +93,8 @@ const Recurring = () => {
           </button>
         </div>
       </div>
+
+      <BillReminderCard bills={items} />
 
       {loading ? (
         <div className="card space-y-2">
