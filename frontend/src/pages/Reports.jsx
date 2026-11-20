@@ -5,6 +5,7 @@ import ExpenseHeatmap from '../components/ExpenseHeatmap';
 import SpendingForecastCard from '../components/SpendingForecastCard';
 import NetWorthCard from '../components/NetWorthCard';
 import DebtPayoffSimulator from '../components/DebtPayoffSimulator';
+import TaxEstimatorCard from '../components/TaxEstimatorCard';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
 import { Download, FileText } from 'lucide-react';
 import {
@@ -125,6 +126,9 @@ const Reports = () => {
           )}
         </div>
       </div>
+
+      {/* Annual Tax Projection */}
+      <TaxEstimatorCard />
 
       {/* Debt Payoff Accelerator */}
       <DebtPayoffSimulator />
