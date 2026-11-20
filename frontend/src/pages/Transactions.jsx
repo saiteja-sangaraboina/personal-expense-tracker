@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Plus, Search, Filter, Download } from 'lucide-react';
+import { Plus, Search, Filter, Download, Upload } from 'lucide-react';
 import { transactionService } from '../services/services';
 import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
+import CsvImportModal from '../components/CsvImportModal';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = ['All','Food','Shopping','Transportation','Education','Entertainment','Healthcare','Bills','Travel','Salary','Freelance','Other'];
@@ -11,6 +12,7 @@ const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [importOpen, setImportOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [total, setTotal] = useState(0);
   const [filters, setFilters] = useState({ type: '', category: '', search: '', sortBy: 'date', order: 'desc', page: 1 });
@@ -58,7 +60,10 @@ const Transactions = () => {
         <div>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{total} Transactions</h2>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <button onClick={() => setImportOpen(true)} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
+            <Upload size={15} /> Import CSV
+          </button>
           <button onClick={handleExport} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
             <Download size={15} /> Export CSV
           </button>
@@ -115,6 +120,7 @@ const Transactions = () => {
       </div>
 
       <TransactionModal isOpen={modalOpen} onClose={handleClose} transaction={editing} onSuccess={() => { fetchTransactions(); handleClose(); }} />
+      <CsvImportModal isOpen={importOpen} onClose={() => setImportOpen(false)} onSuccess={fetchTransactions} />
     </div>
   );
 };
