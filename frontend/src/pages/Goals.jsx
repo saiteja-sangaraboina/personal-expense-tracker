@@ -5,6 +5,7 @@ import GoalModal from '../components/GoalModal';
 import FireCalculatorCard from '../components/FireCalculatorCard';
 import InvestmentGrowthCard from '../components/InvestmentGrowthCard';
 import SavingsVelocityCard from '../components/SavingsVelocityCard';
+import LoanPayoffCard from '../components/LoanPayoffCard';
 import EmptyState from '../components/EmptyState';
 import { SkeletonCard } from '../components/LoadingSkeleton';
 import toast from 'react-hot-toast';
@@ -202,6 +203,9 @@ const Goals = () => {
 
       {/* Compound Interest & Portfolio Simulator */}
       <InvestmentGrowthCard />
+
+      {/* Loan Payoff Acceleration & Interest Savings */}
+      <LoanPayoffCard />
 
       <GoalModal
         isOpen={isModalOpen}
