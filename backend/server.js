@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
+const requestLogger = require('./middleware/requestLogger');
 
 // Load env variables
 dotenv.config();
@@ -34,6 +35,9 @@ app.use('/api', apiLimiter);
 // Body parser
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+
+// Structured request logger
+app.use(requestLogger);
 
 // Request logger (development only)
 if (process.env.NODE_ENV === 'development') {
