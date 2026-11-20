@@ -5,6 +5,7 @@ import KeyboardShortcutsModal from '../components/KeyboardShortcutsModal';
 import TransactionModal from '../components/TransactionModal';
 import QuickActionBar from '../components/QuickActionBar';
 import MobileNav from '../components/MobileNav';
+import IdleTimeoutModal from '../components/IdleTimeoutModal';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useTheme } from '../context/ThemeContext';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -57,6 +58,12 @@ const MainLayout = () => {
       />
       <QuickActionBar onOpenTransactionModal={() => setIsQuickAddOpen(true)} />
       <MobileNav />
+      <IdleTimeoutModal
+        isOpen={false}
+        remainingSeconds={60}
+        onStayLoggedIn={() => {}}
+        onLogout={() => {}}
+      />
     </div>
   );
 };
