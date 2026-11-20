@@ -9,6 +9,7 @@ import FinancialHealthScoreCard from '../components/FinancialHealthScoreCard';
 import SpendingInsightsCard from '../components/SpendingInsightsCard';
 import WelcomeBanner from '../components/WelcomeBanner';
 import EmergencyFundCard from '../components/EmergencyFundCard';
+import SpendingVelocityCard from '../components/SpendingVelocityCard';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -59,6 +60,12 @@ const Dashboard = () => {
         <StatCard title="Total Expenses" amount={summary?.totalExpenses} icon={TrendingDown} color="red" />
         <StatCard title="Monthly Savings" amount={summary?.monthlySavings} icon={PiggyBank} color="purple" />
       </div>
+
+      {/* Spending Velocity & Pace */}
+      <SpendingVelocityCard
+        currentMonthSpent={summary?.totalExpenses || 0}
+        previousMonthSpent={summary?.previousMonthExpenses || 0}
+      />
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Area Chart */}
