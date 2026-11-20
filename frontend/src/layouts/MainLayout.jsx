@@ -8,6 +8,7 @@ const pageTitles = {
   '/budgets': 'Budget Manager',
   '/goals': 'Savings Goals',
   '/recurring': 'Subscriptions & Recurring',
+  '/categories': 'Custom Categories',
   '/reports': 'Reports & Analytics',
   '/profile': 'My Profile',
   '/settings': 'Settings',
