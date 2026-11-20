@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Plus, AlertTriangle, CheckCircle, X } from 'lucide-react';
 import { budgetService } from '../services/services';
+import BudgetSuggestionCard from '../components/BudgetSuggestionCard';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = ['Food','Shopping','Transportation','Education','Entertainment','Healthcare','Bills','Travel','Other'];
@@ -43,6 +44,22 @@ const Budgets = () => {
       fetchBudgets();
     } catch { toast.error('Failed to delete'); }
   };
+
+  const handleApplySuggestion = (suggestion) => {
+    setForm((prev) => ({
+      ...prev,
+      category: suggestion.category,
+      monthlyLimit: suggestion.suggestedLimit,
+    }));
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const smartSuggestions = [
+    { category: 'Food', averageSpent: 380, suggestedLimit: 420, transactionCount: 14 },
+    { category: 'Shopping', averageSpent: 220, suggestedLimit: 250, transactionCount: 8 },
+    { category: 'Transportation', averageSpent: 140, suggestedLimit: 160, transactionCount: 12 },
+  ];
 
   return (
     <div className="space-y-6">
@@ -129,6 +146,11 @@ const Budgets = () => {
           ))}
         </div>
       )}
+
+      <BudgetSuggestionCard
+        suggestions={smartSuggestions}
+        onApplySuggestion={handleApplySuggestion}
+      />
     </div>
   );
 };
