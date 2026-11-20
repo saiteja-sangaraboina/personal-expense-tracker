@@ -8,6 +8,7 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
 const requestLogger = require('./middleware/requestLogger');
 const setSecurityAndCacheHeaders = require('./middleware/cacheHeaders');
+const { querySanitizerMiddleware } = require('./utils/querySanitizer');
 
 // Load env variables
 dotenv.config();
@@ -37,6 +38,7 @@ app.use('/api', apiLimiter);
 // Body parser
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(querySanitizerMiddleware);
 
 // Structured request logger
 app.use(requestLogger);
@@ -70,6 +72,7 @@ app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/cashflow', require('./routes/cashflow'));
 app.use('/api/accounts', require('./routes/accounts'));
 app.use('/api/tags', require('./routes/tags'));
+app.use('/api/telemetry', require('./routes/telemetry'));
 
 // 404 handler
 app.use(notFound);
