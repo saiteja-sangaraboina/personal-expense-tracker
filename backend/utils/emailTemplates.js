@@ -16,7 +16,7 @@
  * @returns {string} HTML string
  */
 function monthlySummaryHtml({ name, month, totalIncome, totalExpenses, netSavings, topCategories = [], budgetAlerts = [] }) {
-  const fmt = (n) => `$${Number(n).toFixed(2)}`;
+  const fmt = (n) => `$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   const savingsColor = netSavings >= 0 ? '#10b981' : '#ef4444';
 
   const categoryRows = topCategories
@@ -124,7 +124,7 @@ function monthlySummaryHtml({ name, month, totalIncome, totalExpenses, netSaving
  * Generate a plain-text version of the monthly summary.
  */
 function monthlySummaryText({ name, month, totalIncome, totalExpenses, netSavings }) {
-  const fmt = (n) => `$${Number(n).toFixed(2)}`;
+  const fmt = (n) => `$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   return `
 Hi ${name},
 
