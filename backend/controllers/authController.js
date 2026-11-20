@@ -4,6 +4,9 @@ const Budget = require('../models/Budget');
 const Goal = require('../models/Goal');
 const Recurring = require('../models/RecurringTransaction');
 const Category = require('../models/Category');
+const Account = require('../models/Account');
+const Tag = require('../models/Tag');
+const ActivityLog = require('../models/ActivityLog');
 const { sendTokenResponse } = require('../utils/tokenUtils');
 
 // @desc    Register user
@@ -141,13 +144,16 @@ const exportUserData = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
-    const [user, transactions, budgets, goals, recurring, categories] = await Promise.all([
+    const [user, transactions, budgets, goals, recurring, categories, accounts, tags, activityLogs] = await Promise.all([
       User.findById(userId),
       Transaction.find({ userId }),
       Budget.find({ userId }),
       Goal.find({ userId }),
       Recurring.find({ userId }),
       Category.find({ userId }),
+      Account.find({ userId }),
+      Tag.find({ userId }),
+      ActivityLog.find({ userId }).sort({ createdAt: -1 }),
     ]);
 
     const archive = {
@@ -165,6 +171,9 @@ const exportUserData = async (req, res, next) => {
         goals: goals.length,
         recurring: recurring.length,
         categories: categories.length,
+        accounts: accounts.length,
+        tags: tags.length,
+        activityLogs: activityLogs.length,
       },
       data: {
         transactions,
@@ -172,6 +181,9 @@ const exportUserData = async (req, res, next) => {
         goals,
         recurring,
         categories,
+        accounts,
+        tags,
+        activityLogs,
       },
     };
 
@@ -194,6 +206,9 @@ const deleteAccount = async (req, res, next) => {
       Goal.deleteMany({ userId }),
       Recurring.deleteMany({ userId }),
       Category.deleteMany({ userId }),
+      Account.deleteMany({ userId }),
+      Tag.deleteMany({ userId }),
+      ActivityLog.deleteMany({ userId }),
       User.findByIdAndDelete(userId),
     ]);
 
