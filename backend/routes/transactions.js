@@ -9,11 +9,12 @@ const {
   exportTransactions,
 } = require('../controllers/transactionController');
 const { protect } = require('../middleware/auth');
+const { validateTransaction } = require('../middleware/validator');
 
 router.use(protect); // All transaction routes are protected
 
 router.get('/export', exportTransactions);
-router.route('/').get(getTransactions).post(createTransaction);
-router.route('/:id').get(getTransaction).put(updateTransaction).delete(deleteTransaction);
+router.route('/').get(getTransactions).post(validateTransaction, createTransaction);
+router.route('/:id').get(getTransaction).put(validateTransaction, updateTransaction).delete(deleteTransaction);
 
 module.exports = router;
