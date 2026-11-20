@@ -1,5 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Wallet, TrendingUp, PieChart, Shield, ArrowRight, CheckCircle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Wallet, TrendingUp, PieChart, Shield, ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
+import { useDemo } from '../context/DemoContext';
+import { useAuth } from '../context/AuthContext';
+import { MOCK_USER } from '../utils/mockData';
 
 const features = [
   { icon: TrendingUp, title: 'Smart Analytics', desc: 'Visual charts to track spending patterns and income trends.' },
@@ -9,6 +12,15 @@ const features = [
 ];
 
 const Landing = () => {
+  const navigate = useNavigate();
+  const { enableDemoMode } = useDemo();
+  const { updateUser } = useAuth();
+
+  const handleLaunchDemo = () => {
+    enableDemoMode();
+    updateUser(MOCK_USER);
+    navigate('/dashboard');
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       {/* Nav */}
@@ -37,11 +49,18 @@ const Landing = () => {
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
           Track income and expenses, set budgets, and understand your spending habits with beautiful charts and analytics.
         </p>
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Link to="/register" className="btn-primary text-base px-8 py-3 flex items-center gap-2">
             Start for free <ArrowRight size={18} />
           </Link>
-          <Link to="/login" className="btn-secondary text-base px-8 py-3">Log in</Link>
+          <button
+            onClick={handleLaunchDemo}
+            className="btn-secondary text-base px-6 py-3 flex items-center gap-2 border border-indigo-200 dark:border-indigo-800"
+          >
+            <Sparkles size={18} className="text-indigo-600 dark:text-indigo-400" />
+            Explore Live Demo
+          </button>
+          <Link to="/login" className="btn-secondary text-base px-6 py-3">Log in</Link>
         </div>
       </section>
 
