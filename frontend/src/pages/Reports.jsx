@@ -8,6 +8,7 @@ import DebtPayoffSimulator from '../components/DebtPayoffSimulator';
 import TaxEstimatorCard from '../components/TaxEstimatorCard';
 import YearInReviewModal from '../components/YearInReviewModal';
 import IncomeBreakdownCard from '../components/IncomeBreakdownCard';
+import AnomalyAlertCard from '../components/AnomalyAlertCard';
 import { exportFinancialReportPdf } from '../utils/pdfExport';
 import { Download, FileText, Sparkles } from 'lucide-react';
 import {
@@ -84,6 +85,9 @@ const Reports = () => {
           <SpendingForecastCard monthlyData={analytics?.monthlyChart} />
         </div>
       </div>
+
+      {/* Outlier & Spending Anomaly Warnings */}
+      <AnomalyAlertCard transactions={transactions} />
 
       {/* Bar Chart */}
       <div className="card">
