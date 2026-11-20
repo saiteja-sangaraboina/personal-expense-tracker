@@ -4,7 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { authService } from '../services/services';
 import ConfirmModal from '../components/ConfirmModal';
 import SecurityPinModal from '../components/SecurityPinModal';
-import { Sun, Moon, LogOut, Download, AlertTriangle, ShieldCheck, Lock } from 'lucide-react';
+import JsonRestoreModal from '../components/JsonRestoreModal';
+import { Sun, Moon, LogOut, Download, UploadCloud, AlertTriangle, ShieldCheck, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -14,6 +15,7 @@ const Settings = () => {
   const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
+  const [isRestoreModalOpen, setIsRestoreModalOpen] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const handleLogout = () => {
@@ -82,13 +84,21 @@ const Settings = () => {
             </p>
             <p className="text-xs text-gray-500">JSON Archive (GDPR / CCPA Compliant)</p>
           </div>
-          <button
-            onClick={handleExportAllData}
-            disabled={downloading}
-            className="btn-secondary text-sm flex items-center gap-2 py-2"
-          >
-            <Download size={15} /> {downloading ? 'Preparing...' : 'Export Archive'}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsRestoreModalOpen(true)}
+              className="btn-secondary text-sm flex items-center gap-1.5 py-2"
+            >
+              <UploadCloud size={15} /> Restore JSON
+            </button>
+            <button
+              onClick={handleExportAllData}
+              disabled={downloading}
+              className="btn-secondary text-sm flex items-center gap-2 py-2"
+            >
+              <Download size={15} /> {downloading ? 'Preparing...' : 'Export Archive'}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -156,6 +166,12 @@ const Settings = () => {
       <SecurityPinModal
         isOpen={isPinModalOpen}
         onClose={() => setIsPinModalOpen(false)}
+      />
+
+      <JsonRestoreModal
+        isOpen={isRestoreModalOpen}
+        onClose={() => setIsRestoreModalOpen(false)}
+        onRestore={() => toast.success('Archive parsed successfully!')}
       />
     </div>
   );
