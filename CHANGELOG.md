@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2026-11-20
+### Added
+- Multi-Wallet & Account Portfolio manager with inter-account balance transfer modal.
+- Net Worth & Liquidity Runway calculator with debt-to-asset solvency metrics.
+- Debt Payoff simulator supporting Avalanche and Snowball elimination strategies.
+- Federal progressive tax bracket & self-employment tax estimator.
+- FIRE (Financial Independence, Retire Early) milestone projection engine.
+- Browser-compatible XML multi-sheet Excel spreadsheet export engine.
+- Session inactivity monitoring with automated logout warning modal.
+- Custom hashtag taxonomy parser and multi-tag transaction badge filter.
+- Client-side 4-digit Security PIN pad with SHA-256 attempt throttling.
+- Emergency Fund essential expense baseline analyzer and safety reserve gauge.
+
 ## [1.4.0] - 2026-11-20
 ### Added
 - Smart AI Spending Insights engine with natural language category shift analysis.
