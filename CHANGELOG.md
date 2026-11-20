@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2026-11-21
+### Added
+- Bill Splitter utility and interactive modal with equal, tip, tax calculations, and clipboard sharing.
+- Spotify-Wrapped style Year in Review annual financial recap modal with peak spending month and top categories.
+- Bill Reminder Engine with urgency classification (overdue, due today, due soon) and deadline alerts card.
+- Compound Interest & Investment Portfolio growth simulator with time-to-target forecasting in Goals.
+- Monthly Budget Health & Envelope Utilization matrix with capacity indicators and risk categorization.
+- Expanded Vitest unit tests to 27 test files (88 passing unit tests).
+
 ## [1.5.0] - 2026-11-20
 ### Added
 - Multi-Wallet & Account Portfolio manager with inter-account balance transfer modal.
