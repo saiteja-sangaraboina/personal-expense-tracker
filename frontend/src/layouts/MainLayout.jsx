@@ -3,6 +3,8 @@ import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import KeyboardShortcutsModal from '../components/KeyboardShortcutsModal';
 import TransactionModal from '../components/TransactionModal';
+import QuickActionBar from '../components/QuickActionBar';
+import MobileNav from '../components/MobileNav';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useTheme } from '../context/ThemeContext';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -52,6 +54,8 @@ const MainLayout = () => {
         onClose={() => setIsQuickAddOpen(false)}
         onSuccess={() => window.location.reload()}
       />
+      <QuickActionBar onOpenTransactionModal={() => setIsQuickAddOpen(true)} />
+      <MobileNav />
     </div>
   );
 };
