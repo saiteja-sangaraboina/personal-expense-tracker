@@ -5,6 +5,7 @@ import { authService } from '../services/services';
 import ConfirmModal from '../components/ConfirmModal';
 import SecurityPinModal from '../components/SecurityPinModal';
 import JsonRestoreModal from '../components/JsonRestoreModal';
+import NotificationSettingsCard from '../components/NotificationSettingsCard';
 import { Sun, Moon, LogOut, Download, UploadCloud, AlertTriangle, ShieldCheck, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -122,6 +123,9 @@ const Settings = () => {
           </button>
         </div>
       </div>
+
+      {/* Delivery Channels */}
+      <NotificationSettingsCard />
 
       <div className="card">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-5">Account Actions</h3>
