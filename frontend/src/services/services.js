@@ -24,6 +24,20 @@ export const budgetService = {
   remove: (id) => API.delete(`/budgets/${id}`),
 };
 
+export const goalService = {
+  getAll: () => API.get('/goals'),
+  create: (data) => API.post('/goals', data),
+  update: (id, data) => API.put(`/goals/${id}`, data),
+  remove: (id) => API.delete(`/goals/${id}`),
+};
+
+export const recurringService = {
+  getAll: () => API.get('/recurring'),
+  create: (data) => API.post('/recurring', data),
+  update: (id, data) => API.put(`/recurring/${id}`, data),
+  remove: (id) => API.delete(`/recurring/${id}`),
+};
+
 export const dashboardService = {
   getSummary: () => API.get('/dashboard/summary'),
   getAnalytics: (params) => API.get('/dashboard/analytics', { params }),
