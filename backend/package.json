@@ -9,6 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+  "description": "Personal Expense Tracker - REST API Backend",
+  "author": "Saiteja Sangaraboina",
   "keywords": [],
   "license": "ISC",
   "type": "commonjs",
