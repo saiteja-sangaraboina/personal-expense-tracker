@@ -60,6 +60,7 @@ app.use('/api/goals', require('./routes/goals'));
 app.use('/api/recurring', require('./routes/recurring'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/activity', require('./routes/activity'));
+app.use('/api/notifications', require('./routes/notifications'));
 
 // 404 handler
 app.use(notFound);
