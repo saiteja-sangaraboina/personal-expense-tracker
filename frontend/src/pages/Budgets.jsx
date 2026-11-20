@@ -3,6 +3,7 @@ import { Plus, AlertTriangle, CheckCircle, X } from 'lucide-react';
 import { budgetService } from '../services/services';
 import BudgetSuggestionCard from '../components/BudgetSuggestionCard';
 import BudgetUtilizationCard from '../components/BudgetUtilizationCard';
+import BudgetAllocationChart from '../components/BudgetAllocationChart';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = ['Food','Shopping','Transportation','Education','Entertainment','Healthcare','Bills','Travel','Other'];
@@ -74,6 +75,9 @@ const Budgets = () => {
       </div>
 
       <BudgetUtilizationCard budgets={budgets} />
+
+      {/* Allocation Doughnut Visualizer */}
+      <BudgetAllocationChart budgets={budgets} />
 
       {/* Form */}
       {showForm && (
