@@ -5,6 +5,7 @@ import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
 import CsvImportModal from '../components/CsvImportModal';
 import ReceiptScannerModal from '../components/ReceiptScannerModal';
+import ExcelExportButton from '../components/ExcelExportButton';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = ['All','Food','Shopping','Transportation','Education','Entertainment','Healthcare','Bills','Travel','Salary','Freelance','Other'];
@@ -69,6 +70,7 @@ const Transactions = () => {
           <button onClick={handleExport} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
             <Download size={15} /> Export CSV
           </button>
+          <ExcelExportButton transactions={transactions} />
           <button onClick={() => setScannerOpen(true)} className="btn-secondary text-sm flex items-center gap-1.5 py-2">
             <Camera size={15} /> Scan Receipt
           </button>
