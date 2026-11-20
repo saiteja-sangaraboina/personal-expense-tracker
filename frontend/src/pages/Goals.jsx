@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Target, Plus, Pencil, Trash2, Calendar, Award } from 'lucide-react';
 import { goalService } from '../services/services';
 import GoalModal from '../components/GoalModal';
+import FireCalculatorCard from '../components/FireCalculatorCard';
 import EmptyState from '../components/EmptyState';
 import { SkeletonCard } from '../components/LoadingSkeleton';
 import toast from 'react-hot-toast';
@@ -186,6 +187,9 @@ const Goals = () => {
           })}
         </div>
       )}
+
+      {/* FIRE Independence Milestone Projection */}
+      <FireCalculatorCard />
 
       <GoalModal
         isOpen={isModalOpen}
