@@ -1,6 +1,7 @@
-import { Bell, Sun, Moon, Search } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import NotificationCenter from './NotificationCenter';
 
 const Navbar = ({ title = 'Dashboard' }) => {
   const { theme, toggleTheme } = useTheme();
@@ -16,6 +17,9 @@ const Navbar = ({ title = 'Dashboard' }) => {
       </div>
 
       <div className="flex items-center gap-3">
+        {/* Notifications */}
+        <NotificationCenter />
+
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
