@@ -7,6 +7,7 @@ const connectDB = require('./config/db');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
 const requestLogger = require('./middleware/requestLogger');
+const setSecurityAndCacheHeaders = require('./middleware/cacheHeaders');
 
 // Load env variables
 dotenv.config();
@@ -18,6 +19,7 @@ const app = express();
 
 // Security headers
 app.use(helmet());
+app.use(setSecurityAndCacheHeaders);
 
 // CORS configuration
 app.use(
