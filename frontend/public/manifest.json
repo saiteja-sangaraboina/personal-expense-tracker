@@ -1,0 +1,16 @@
+{
+  "name": "Personal Expense Tracker",
+  "short_name": "ExpenseTracker",
+  "description": "Full-stack personal finance and expense tracker",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#4f46e5",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
