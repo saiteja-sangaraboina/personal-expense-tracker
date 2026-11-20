@@ -4,6 +4,7 @@ import { goalService } from '../services/services';
 import GoalModal from '../components/GoalModal';
 import FireCalculatorCard from '../components/FireCalculatorCard';
 import InvestmentGrowthCard from '../components/InvestmentGrowthCard';
+import SavingsVelocityCard from '../components/SavingsVelocityCard';
 import EmptyState from '../components/EmptyState';
 import { SkeletonCard } from '../components/LoadingSkeleton';
 import toast from 'react-hot-toast';
@@ -188,6 +189,13 @@ const Goals = () => {
           })}
         </div>
       )}
+
+      {/* Savings Velocity & Milestones Projection */}
+      <SavingsVelocityCard
+        monthlyIncome={5000}
+        monthlyExpenses={3200}
+        currentSavings={goals.reduce((sum, g) => sum + Number(g.currentAmount || 0), 0)}
+      />
 
       {/* FIRE Independence Milestone Projection */}
       <FireCalculatorCard />
