@@ -5,6 +5,7 @@ import StatCard from '../components/StatCard';
 import TransactionItem from '../components/TransactionItem';
 import TransactionModal from '../components/TransactionModal';
 import CurrencyConverterWidget from '../components/CurrencyConverterWidget';
+import FinancialHealthScoreCard from '../components/FinancialHealthScoreCard';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
@@ -123,7 +124,10 @@ const Dashboard = () => {
         )}
       </div>
 
-      <CurrencyConverterWidget />
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        <FinancialHealthScoreCard summary={summary} />
+        <CurrencyConverterWidget />
+      </div>
 
       <TransactionModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onSuccess={fetchData} />
     </div>
